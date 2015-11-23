@@ -5,6 +5,7 @@ import com.bhati.dao.GeoEventMao;
 import com.bhati.dao.UserDetailsDao;
 import com.bhati.entity.GeoEvent;
 import com.bhati.entity.UserDetails;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,21 +37,17 @@ public class GeoController {
         }
     }
 
-    public void getGeoLocation(@PathVariable Long id){
-
+    @RequestMapping(value = "/getGeoId", method = RequestMethod.GET)
+    public void getGeoforID(@PathVariable Long id){
+        eventDao.get(id);
     }
 
-    @RequestMapping(value = "/getallGeo", method = RequestMethod.GET)
-    public String getAllGeoLocation(){
+    @RequestMapping(value = "/getGeoAll", method = RequestMethod.GET)
+    public Set<GeoEvent> getAllGeoLocation(){
         Set<GeoEvent> eventSet = eventDao.getAll();
-        for(GeoEvent event :eventSet){
-            
-        }
-
+        return eventSet;
     }
 
-    public void setEventforId(){
-    }
 
     public boolean isUserDetailsValid(UserDetails userDetails) {
         return true;
