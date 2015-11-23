@@ -1,12 +1,14 @@
 package com.bhati.dao;
 
 import com.bhati.entity.GeoEvent;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
 /**
  * Created by aman on 22/11/15.
  */
+@Component("eventMao")
 public class GeoEventMao implements GeoEventDao {
 
     private Map<Long,GeoEvent> map = new HashMap<>();
@@ -30,8 +32,8 @@ public class GeoEventMao implements GeoEventDao {
     }
 
     @Override
-    public Set<GeoEvent> getAll() {
-        Set<GeoEvent> events = new HashSet<>();
+    public HashSet<GeoEvent> getAll() {
+        HashSet<GeoEvent> events = new HashSet<>();
         for(Map.Entry entry : map.entrySet()){
             events.add(map.get(entry.getKey()));
         }
