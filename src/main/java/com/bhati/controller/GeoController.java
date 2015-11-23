@@ -1,15 +1,12 @@
 package com.bhati.controller;
 
 import com.bhati.dao.GeoEventDao;
-import com.bhati.dao.GeoEventMao;
 import com.bhati.dao.UserDetailsDao;
 import com.bhati.entity.GeoEvent;
 import com.bhati.entity.UserDetails;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -21,6 +18,7 @@ public class GeoController {
     @Autowired
     private UserDetailsDao userDao;
 
+    @Autowired
     private GeoEventDao eventDao;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
