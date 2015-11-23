@@ -13,7 +13,6 @@ public class Validator {
         Matcher m = p.matcher(str);
         isvalid = m.find();
         return  isvalid;
-
     }
 
 

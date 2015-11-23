@@ -1,4 +1,4 @@
-package com.bhati;
+package com.bhati.controller;
 
 import com.bhati.dao.GeoEventDao;
 import com.bhati.dao.GeoEventMao;
