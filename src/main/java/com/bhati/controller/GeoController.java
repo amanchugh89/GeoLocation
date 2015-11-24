@@ -9,8 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.Consumes;
+
 import java.util.Set;
+import javax.ws.rs.Consumes;
 
 /**
  * Created by aman on 22/11/15.
@@ -25,16 +26,17 @@ public class GeoController {
     private GeoEventDao eventDao;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
+   // @Consumes("application/json")
     @Consumes("application/json")
-    public void register(@RequestParam UserDetails userDetails){
+    public void register(@RequestBody UserDetails userDetails){
         if(userDetails!=null && isUserDetailsValid(userDetails)){
 
             userDao.save(userDetails);
         }
     }
     @RequestMapping(value = "/addEvent", method = RequestMethod.POST)
-    @Consumes("application/json")
-    public void addEvent(@RequestParam GeoEvent event){
+//    @Consumes("application/json")
+    public void addEvent(@RequestBody GeoEvent event){
         if(event!=null ||isGeoEventValid(event)){
             eventDao.put(event);
         }

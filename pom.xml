@@ -37,6 +37,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>mysql</groupId>
@@ -60,12 +64,19 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
+
+
 		<dependency>
-			<groupId>javax.ws.rs</groupId>
-			<artifactId>jsr311-api</artifactId>
-			<version>1.0</version>
+			<groupId>com.informix.jdbc</groupId>
+			<artifactId>com.springsource.com.informix.jdbc</artifactId>
+			<version>3.0.0.JC3</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+    </dependencies>
 	
 	<dependencyManagement>
 		<dependencies>
@@ -105,6 +116,19 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+
+	<repository>
+		<id>com.springsource.repository.bundles.release</id>
+		<name>SpringSource Enterprise Bundle Repository - SpringSource Bundle Releases</name>
+		<url>http://repository.springsource.com/maven/bundles/release</url>
+	</repository>
+
+	<repository>
+		<id>com.springsource.repository.bundles.external</id>
+		<name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
+		<url>http://repository.springsource.com/maven/bundles/external</url>
+	</repository>
+
 	</repositories>
 
 </project>
