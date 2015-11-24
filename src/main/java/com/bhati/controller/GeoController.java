@@ -1,12 +1,14 @@
 package com.bhati.controller;
 
 import com.bhati.dao.GeoEventDao;
-import com.bhati.dao.UserDetailsDao;
+import com.bhati.dao.UserDetailsRepository;
 import com.bhati.entity.GeoEvent;
 import com.bhati.entity.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.Consumes;
 import java.util.Set;
 
 /**
@@ -16,12 +18,13 @@ import java.util.Set;
 public class GeoController {
 
     @Autowired
-    private UserDetailsDao userDao;
+    private UserDetailsRepository userDao;
 
     @Autowired
     private GeoEventDao eventDao;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @Consumes("application/json")
     public void register(@RequestParam UserDetails userDetails){
         if(userDetails!=null || isUserDetailsValid(userDetails)){
 
@@ -29,6 +32,7 @@ public class GeoController {
         }
     }
     @RequestMapping(value = "/addEvent", method = RequestMethod.POST)
+    @Consumes("application/json")
     public void addEvent(@RequestParam GeoEvent event){
         if(event!=null ||isGeoEventValid(event)){
             eventDao.put(event);

@@ -60,7 +60,11 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>jsr311-api</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
 	
 	<dependencyManagement>
