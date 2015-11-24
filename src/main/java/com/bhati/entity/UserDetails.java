@@ -1,15 +1,12 @@
 package com.bhati.entity;
 
-import com.google.gson.Gson;
-import org.springframework.data.domain.Persistable;
-import org.springframework.stereotype.Component;
 
+import org.springframework.data.domain.Persistable;
 import javax.persistence.*;
 
 /**
  * Created by aman on 23/11/15.
  */
-@Component
 @Entity
 @Table(name = "userdetails")
 @Access(value = AccessType.FIELD)
@@ -21,7 +18,7 @@ public class UserDetails implements Persistable<Long> {
 
     @Column(name = "name")
     private String name;
-    @Column(name = "mobile")
+    @Column(name = "mobile" , unique =true)
     private long mobile;
     @Column(name = "center")
     private String center;

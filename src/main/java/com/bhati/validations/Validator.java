@@ -14,6 +14,13 @@ public class Validator {
         isvalid = m.find();
         return  isvalid;
     }
+    public static boolean isValidOnlyString(String str){
+        boolean isvalid=false;
+        Pattern p = Pattern.compile("[^a-z ]", Pattern.CASE_INSENSITIVE);
+        Matcher m = p.matcher(str);
+        isvalid = m.find();
+        return  isvalid;
+    }
 
 
 }

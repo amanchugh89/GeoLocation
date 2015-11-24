@@ -4,6 +4,7 @@ import com.bhati.dao.GeoEventDao;
 import com.bhati.dao.UserDetailsRepository;
 import com.bhati.entity.GeoEvent;
 import com.bhati.entity.UserDetails;
+import com.bhati.validations.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class GeoController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @Consumes("application/json")
     public void register(@RequestParam UserDetails userDetails){
-        if(userDetails!=null || isUserDetailsValid(userDetails)){
+        if(userDetails!=null && isUserDetailsValid(userDetails)){
 
             userDao.save(userDetails);
         }
@@ -52,6 +53,7 @@ public class GeoController {
 
 
     public boolean isUserDetailsValid(UserDetails userDetails) {
+        if(Validator.isValidOnlyString(userDetails.getName()));
         return true;
     }
 
