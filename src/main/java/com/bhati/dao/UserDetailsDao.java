@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 /**
  * Created by aman on 23/11/15.
  */
-@Component
 public interface UserDetailsDao extends CrudRepository<UserDetails,Long> {
     UserDetails  getUserDetails(String name);
     UserDetails getUserDetails(long deviceID);
