@@ -28,11 +28,12 @@ public class GeoController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
    // @Consumes("application/json")
     @Consumes("application/json")
-    public void register(@RequestBody UserDetails userDetails){
+    public UserDetails register(@RequestBody UserDetails userDetails){
         if(userDetails!=null && isUserDetailsValid(userDetails)){
 
-            userDao.save(userDetails);
+           return userDao.save(userDetails);
         }
+        return null;
     }
     @RequestMapping(value = "/addEvent", method = RequestMethod.POST)
 //    @Consumes("application/json")
