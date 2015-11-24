@@ -2,7 +2,6 @@ package com.bhati.repository;
 
 import com.bhati.entity.UserDetails;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

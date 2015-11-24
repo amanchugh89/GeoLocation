@@ -1,12 +1,11 @@
 package com.bhati.controller;
 
 import com.bhati.dao.GeoEventDao;
-import com.bhati.dao.UserDetailsRepository;
 import com.bhati.entity.GeoEvent;
 import com.bhati.entity.UserDetails;
+import com.bhati.repository.UserDetailsRepository;
 import com.bhati.validations.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.Consumes;
