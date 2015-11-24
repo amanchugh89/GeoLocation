@@ -44,16 +44,7 @@ public class TestService {
 
 
 
-public class TestService {
-
-
-    GeoController controller = new GeoController();
-    GeoEventDao mao = new GeoEventMao();
-
-
-
-    @Test
-
+   @Test
     public void registerUser(){
         UserDetails details = new UserDetails("aman",9999700996l,"bhati","g123");
         try {
@@ -66,15 +57,6 @@ public class TestService {
         }
 }
 
-    public void testevent(){
-        GeoEvent event  = new GeoEvent(123l,23.4,12.2,312121l);
-        GeoEvent event1  = new GeoEvent(113l,23.4,12.2,312121l);
-        mao.put(event);
-        mao.put(event1);
-        assertEquals(mao.get(123l),event);
 
-
-
-    }
 }
 
