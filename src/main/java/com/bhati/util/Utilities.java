@@ -8,4 +8,9 @@ public class Utilities {
     public static void toJson(){
 
     }
+
+    public static long getTimeStamp(){
+        Long timestamp = System.currentTimeMillis();
+        return timestamp;
+    }
 }

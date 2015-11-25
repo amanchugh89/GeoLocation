@@ -47,7 +47,7 @@ public class TestService {
 
    @Test
     public void registerUser(){
-        UserDetails details = new UserDetails("aman",9999700996l,"bhati","g123");
+        UserDetails details = new UserDetails("aman",9999700996l,"bhati","g123", "dl 1100");
         try {
             HttpEntity<UserDetails> userDetailsHttpEntity = new RequestEntity<UserDetails>(details, HttpMethod.POST,new URI(REGISTER_URI));
            ResponseEntity<UserDetails> ud= t.postForEntity(REGISTER_URI, details, UserDetails.class );
@@ -58,11 +58,11 @@ public class TestService {
 }
 
         public void testevent() {
-            GeoEvent event = new GeoEvent(123l, 23.4, 12.2, 312121l);
-            GeoEvent event1 = new GeoEvent(113l, 23.4, 12.2, 312121l);
+            GeoEvent event = new GeoEvent("XXYYXX", 23.4, 12.2);
+            GeoEvent event1 = new GeoEvent("XYZXYZ", 23.4, 12.2);
             mao.put(event);
             mao.put(event1);
-            assertEquals(mao.get(123l), event);
+            assertEquals(mao.get("XXYYXX"), event);
         }
 }
 

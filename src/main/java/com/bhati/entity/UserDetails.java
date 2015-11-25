@@ -24,16 +24,20 @@ public class UserDetails implements Persistable<Long> {
     private String center;
     @Column(name = "batch")
     private String batch;
+    @Column(name= "vehicle_number")
+    private String vehicleNumber;
 
 
     public UserDetails(){
     }
 
-    public UserDetails(String name, long mobile, String center , String batch){
+    public UserDetails(String name, long mobile, String center , String batch, String vehicleNumber){
         this.name=name;
         this.mobile=mobile;
         this.center=center;
         this.batch=batch;
+        this.vehicleNumber=vehicleNumber;
+
     }
 
     public String getName() {
@@ -67,6 +71,10 @@ public class UserDetails implements Persistable<Long> {
     public void setBatch(String batch) {
         this.batch = batch;
     }
+    public String getVehicleNumber() { return vehicleNumber;
+    }
+
+    public void setVehicleNumber(String vehicleNumber) { this.vehicleNumber = vehicleNumber; }
 
     @Override
     public String toString() {
@@ -75,6 +83,7 @@ public class UserDetails implements Persistable<Long> {
                 ", mobile=" + mobile +
                 ", center='" + center + '\'' +
                 ", batch='" + batch + '\'' +
+                ", vehicleNumber='" + vehicleNumber + '\'' +
                 '}';
     }
 
