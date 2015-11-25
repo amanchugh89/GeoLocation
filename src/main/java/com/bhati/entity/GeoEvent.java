@@ -10,7 +10,7 @@ public class GeoEvent {
     private long id;
     private double latitude;
     private double longitude;
-    private long timestamp;
+    private long timestamp = new Date().getTime();
 
     public GeoEvent(){
     }
