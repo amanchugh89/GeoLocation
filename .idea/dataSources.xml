@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="1116732924">
+    <data-source source="LOCAL" name="PostgreSQL - d65la4c35du3p0@ec2-54-83-201-196.compute-1.amazonaws.com" uuid="734c9acb-78e5-4cbe-8dbe-c5dc28818f87">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-54-83-201-196.compute-1.amazonaws.com:5432/d65la4c35du3p0</jdbc-url>
+      <driver-properties>
+        <property name="sslmode" value="require" />
+        <property name="ssl" value="true" />
+        <property name="sslfactory" value="org.postgresql.ssl.NonValidatingFactory" />
+      </driver-properties>
+      <libraries />
+    </data-source>
+  </component>
+</project>

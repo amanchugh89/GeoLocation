@@ -1,5 +1,7 @@
 package com.bhati.entity;
 
+import java.util.Date;
+
 /**
  * Created by aman on 22/11/15.
  */
@@ -17,7 +19,7 @@ public class GeoEvent {
         this.id=id;
         this.latitude=latitude;
         this.longitude=longitude;
-        this.timestamp = timestamp;
+        this.timestamp = new Date().getTime();
     }
 
     public long getId() {
@@ -33,9 +35,9 @@ public class GeoEvent {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
+    /*public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
-    }
+    }*/
 
     public double getLatitude() {
         return latitude;
