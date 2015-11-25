@@ -37,6 +37,7 @@ import java.net.URISyntaxException;
 public class TestService {
 
 
+    GeoEventMao mao = new GeoEventMao();
     public static final String REGISTER_URI ="http://localhost:8080/register";
 
     RestTemplate t = new TestRestTemplate();
@@ -49,7 +50,6 @@ public class TestService {
         UserDetails details = new UserDetails("aman",9999700996l,"bhati","g123");
         try {
             HttpEntity<UserDetails> userDetailsHttpEntity = new RequestEntity<UserDetails>(details, HttpMethod.POST,new URI(REGISTER_URI));
-
            ResponseEntity<UserDetails> ud= t.postForEntity(REGISTER_URI, details, UserDetails.class );
             assert(!ud.getBody().isNew());
         } catch (URISyntaxException e) {
@@ -57,6 +57,12 @@ public class TestService {
         }
 }
 
-
+        public void testevent() {
+            GeoEvent event = new GeoEvent(123l, 23.4, 12.2, 312121l);
+            GeoEvent event1 = new GeoEvent(113l, 23.4, 12.2, 312121l);
+            mao.put(event);
+            mao.put(event1);
+            assertEquals(mao.get(123l), event);
+        }
 }
 
