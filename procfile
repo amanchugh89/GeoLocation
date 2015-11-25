@@ -1,1 +1,0 @@
-web: java -Dserver.port=$PORT -Dserver.profiles.active=heroku -jar  target/geoLocation-0.0.1-SNAPSHOT.war
