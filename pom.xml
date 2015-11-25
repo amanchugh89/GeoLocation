@@ -6,7 +6,7 @@
 	<groupId>com.bhati</groupId>
 	<artifactId>geoLocation</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>GeoLocation</name>
 	<description>geo location project</description>
