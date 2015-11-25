@@ -15,7 +15,7 @@ public class GeoEvent {
     public GeoEvent(){
     }
 
-    public GeoEvent(long id,double latitude , double  longitude , long timestamp){
+    public GeoEvent(long id,double latitude , double  longitude){
         this.id=id;
         this.latitude=latitude;
         this.longitude=longitude;
