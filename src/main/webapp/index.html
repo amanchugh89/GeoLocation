@@ -24,7 +24,7 @@
 <!-- 	$(document).ready(function () { -->
 function initMap() {
 
-$.get("https://geoloctrack.herokuapp.com/getGeoAll", function(data){
+$.get("/getGeoAll", function(data){
 	var response = data;
 	 var myLatLng1 = {lat: 13.12, lng:  34.44};
  

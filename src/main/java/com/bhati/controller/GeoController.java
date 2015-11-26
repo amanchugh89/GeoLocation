@@ -55,8 +55,8 @@ public class GeoController {
     }
 
     @RequestMapping(value = "/getGeoId", method = RequestMethod.GET)
-    public void getGeoforID(@PathVariable String deviceId){
-        eventDao.get(deviceId);
+    public void getGeoforID(@PathVariable long id){
+        eventDao.get(id);
     }
 
     @RequestMapping(value = "/getGeoAll", method = RequestMethod.GET)

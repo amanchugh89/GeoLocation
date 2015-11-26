@@ -14,10 +14,10 @@ import java.util.*;
 @Scope("singleton")
 public class GeoEventMao implements GeoEventDao {
 
-    private Map<String,GeoEvent> map = new HashMap<>();
+    private Map<Long,GeoEvent> map = new HashMap<>();
     @Override
     public void put(GeoEvent event) {
-        String id = event.getdeviceId();
+        long id = event.getId();
         map.put(id , event);
 
     }
@@ -30,8 +30,8 @@ public class GeoEventMao implements GeoEventDao {
     }
 
     @Override
-    public GeoEvent get(String deviceid) {
-        return map.get(deviceid);
+    public GeoEvent get(long id) {
+        return map.get(id);
     }
 
     @Override

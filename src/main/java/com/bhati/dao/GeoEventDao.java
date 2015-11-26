@@ -15,6 +15,6 @@ public interface GeoEventDao {
     public void put(GeoEvent event);
     public void put(List<GeoEvent> events);
 
-    public GeoEvent get(String id);
+    public GeoEvent get(long id);
     public HashSet<GeoEvent> getAll();
 }
