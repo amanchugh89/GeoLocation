@@ -65,6 +65,12 @@
 			<scope>provided</scope>
 		</dependency>
 
+        <dependency>
+            <groupId>com.informix.jdbc</groupId>
+            <artifactId>com.springsource.com.informix.jdbc</artifactId>
+            <version>3.0.0.JC3</version>
+        </dependency>
+
 		<dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>javax.ws.rs-api</artifactId>
@@ -76,6 +82,7 @@
 			<artifactId>postgresql</artifactId>
 			<version>9.1-901-1.jdbc4</version>
 		</dependency>
+
 
 	</dependencies>
 	
