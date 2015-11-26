@@ -20,9 +20,12 @@
 	    <script 
 		src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script>
-
+	var myLatLng1 = {lat: 28.441193, lng:  77.199203};
+		 
+	var map;
+	
 	var getBusLoc = function(){	
-		$.get("https://geoloctrack.herokuapp.com/getGeoAll", function(data){
+		$.get("getGeoAll", function(data){
 			var response = data;				
 			for( i =0; i<response.length; i++){
 				var dt = new Date(response[i].timestamp),
@@ -42,12 +45,10 @@
 	
 	function initMap() {
 
-		var myLatLng1 = {lat: 28.441193, lng:  77.199203};
-		 
-		var map = new google.maps.Map(document.getElementById('map'), {
-			zoom: 11,
-			center: myLatLng1
-		});
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 11,
+            center: myLatLng1
+        });
 
 		var marker = new google.maps.Marker({
 			position: myLatLng1,
@@ -58,8 +59,8 @@
 			  scale: 5,
 			  strokeColor: "#689f38"
 			}
-		});		
-		
+		});
+        getBusLoc();
 		setInterval(function(){
 			getBusLoc();
 		}, 30*1000);
