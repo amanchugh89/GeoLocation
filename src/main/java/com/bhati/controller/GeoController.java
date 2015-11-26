@@ -30,7 +30,7 @@ public class GeoController {
     @Autowired
     private GeoEventRepository eventRepository;
 
-    @Value(Constants.EVENT_PERSISTANCE_ENABLED)
+    @Value("${event.persistance}")
     boolean isEventPersistanceEnabled;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -49,9 +49,8 @@ public class GeoController {
     public void addEvent(@RequestBody GeoEvent event){
         if(event!=null ||isGeoEventValid(event)){
             eventDao.put(event);
-            if(isEventPersistanceEnabled) {
+            if(isEventPersistanceEnabled)
                 eventRepository.save(event);
-            }
         }
     }
 
@@ -72,7 +71,8 @@ public class GeoController {
         return true;
     }
 
-    public boolean isGeoEventValid(GeoEvent event) {
+    public boolean isGeoEventValid(GeoEvent event)
+    {
         return true;
     }
 

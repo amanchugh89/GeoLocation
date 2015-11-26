@@ -39,6 +39,7 @@ public class TestService {
 
     GeoEventMao mao = new GeoEventMao();
     public static final String REGISTER_URI ="http://localhost:8080/register";
+    public static final String TEST_URI ="http://localhost:8080/addEvent";
 
     RestTemplate t = new TestRestTemplate();
 
@@ -56,13 +57,18 @@ public class TestService {
             e.printStackTrace();
         }
 }
-
+        @Test
         public void testevent() {
-            GeoEvent event = new GeoEvent("XXYYXX", 23.4, 12.2);
-            GeoEvent event1 = new GeoEvent("XYZXYZ", 23.4, 12.2);
-            mao.put(event);
-            mao.put(event1);
-            assertEquals(mao.get("XXYYXX"), event);
+
+            GeoEvent event = new GeoEvent("XXXYY",11.22,22.34);
+            GeoEvent event2 = new GeoEvent("YYZZ",21.22,24.34);
+            try {
+                HttpEntity<GeoEvent> eventsHttpEntity = new RequestEntity<GeoEvent>(event, HttpMethod.POST,new URI(TEST_URI));
+                ResponseEntity<GeoEvent> ud= t.postForEntity(TEST_URI, eventsHttpEntity, GeoEvent.class );
+                assert(!ud.getBody().isNew());
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
         }
 }
 

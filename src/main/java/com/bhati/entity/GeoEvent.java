@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by aman on 22/11/15.
  */
 @Entity
-@Table(name = "userdetails")
+@Table(name = "geo_event")
 @Access(value = AccessType.FIELD)
 public class GeoEvent implements Persistable<Long> {
 
