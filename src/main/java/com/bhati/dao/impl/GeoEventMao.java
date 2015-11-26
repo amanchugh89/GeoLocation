@@ -14,7 +14,13 @@ import java.util.*;
 @Scope("singleton")
 public class GeoEventMao implements GeoEventDao {
 
+<<<<<<< HEAD
     private Map<Long,GeoEvent> map = new HashMap<>();
+=======
+    private Map<String,GeoEvent> map = new HashMap<>();
+
+
+>>>>>>> c4193fe6b1207483e715ba1c69dd0bcbac98b5ae
     @Override
     public void put(GeoEvent event) {
         long id = event.getId();
