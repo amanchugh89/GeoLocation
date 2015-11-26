@@ -5,13 +5,14 @@ $( document ).ready(function() {
     console.log("ready!");
 
 
-    $("#reload").click(function () {
 
-        location.reload();
-    });
+    $("#reload").click(function(){ initMap()});
 
 
 });
+
+window.setTimeout(
+    initMap,5000);
 
 function initMap() {
 
