@@ -27,13 +27,13 @@
 	var getBusLoc = function(){	
 		$.get("getGeoAll", function(data){
 			var response = data;				
-			for( i =0; i<response.length; i++){
+			for( i =0; i<response.length && response[i].userDetails!=null; i++){
 				var dt = new Date(response[i].timestamp),
 					time = dt.getHours()+":"+dt.getMinutes();
 				var marker = new google.maps.Marker({
 					position: {'lat':response[i].latitude, 'lng': response[i].longitude },
 					map: map,
-					title: response[i].userId + ". Last updated at : "+time,
+					title: response[i].userId + ". Last updated at : "+time +" for User "+ response[i].userDetails.name,
 					icon: {
 					  path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
 					  scale: 3
