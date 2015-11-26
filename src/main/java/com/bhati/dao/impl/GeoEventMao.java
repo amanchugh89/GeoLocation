@@ -15,6 +15,8 @@ import java.util.*;
 public class GeoEventMao implements GeoEventDao {
 
     private Map<String,GeoEvent> map = new HashMap<>();
+
+
     @Override
     public void put(GeoEvent event) {
         String id = event.getdeviceId();
