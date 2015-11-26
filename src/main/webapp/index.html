@@ -33,7 +33,7 @@
 				var marker = new google.maps.Marker({
 					position: {'lat':response[i].latitude, 'lng': response[i].longitude },
 					map: map,
-					title: response[i].id + ". Last updated at : "+time,
+					title: response[i].userId + ". Last updated at : "+time,
 					icon: {
 					  path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
 					  scale: 3
