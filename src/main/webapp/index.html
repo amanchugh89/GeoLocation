@@ -21,49 +21,49 @@
 		src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script>
 
-<!-- 	$(document).ready(function () { -->
-function initMap() {
-
-$.get("getGeoAll", function(data){
-	var response = data;
-	 var myLatLng1 = {lat: 28, lng:  77};
- 
- var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 8,
-    center: myLatLng1
-  });
-
-  
-for( i =0; i<response.length; i++)
-{
-	var myLatLng = {'lat':response[i].latitude, 'lng': response[i].longitude };
+	var getBusLoc = function(){	
+		$.get("https://geoloctrack.herokuapp.com/getGeoAll", function(data){
+			var response = data;				
+			for( i =0; i<response.length; i++){
+				var dt = new Date(response[i].timestamp),
+					time = dt.getHours()+":"+dt.getMinutes();
+				var marker = new google.maps.Marker({
+					position: {'lat':response[i].latitude, 'lng': response[i].longitude },
+					map: map,
+					title: response[i].id + ". Last updated at : "+time,
+					icon: {
+					  path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+					  scale: 3
+					}
+				});
+			}
+		});
+	}	
 	
-	  var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-    title: String(response[i].id)
-  });
-}
+	function initMap() {
 
+		var myLatLng1 = {lat: 28.441193, lng:  77.199203};
+		 
+		var map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 11,
+			center: myLatLng1
+		});
 
-});
-
-
-
-
-
-
-	//var myLatLng  = response[i].latitude
-
-}
-
-<!-- }); -->
-
-//  var myLatLng = {lat: -25.363, lng: 131.044};
-
- 
- 
-
+		var marker = new google.maps.Marker({
+			position: myLatLng1,
+			map: map,
+			title: "Bhati",
+			icon: {
+			  path: google.maps.SymbolPath.CIRCLE,
+			  scale: 5,
+			  strokeColor: "#689f38"
+			}
+		});		
+		
+		setInterval(function(){
+			getBusLoc();
+		}, 30*1000);
+	}
 
     </script>
     <script async defer
