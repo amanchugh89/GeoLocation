@@ -10,6 +10,8 @@ import java.util.List;
  */
 public interface GeoEventRepository extends CrudRepository<GeoEvent , Long>{
 
-    List<GeoEvent> findBydeviceId(String deviceId);
+    List<GeoEvent> findByuserId(String deviceId);
     GeoEvent findById(long id);
+
+    List<GeoEvent> findLatestDistinctEvents();
 }

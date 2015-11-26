@@ -1,7 +1,6 @@
 package com.bhati.dao;
 
 import com.bhati.entity.GeoEvent;
-import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.List;
@@ -16,5 +15,7 @@ public interface GeoEventDao {
     public void put(List<GeoEvent> events);
 
     public GeoEvent get(long id);
-    public HashSet<GeoEvent> getAll();
+
+
+    public HashSet<Object> getAll();
 }

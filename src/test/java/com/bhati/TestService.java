@@ -60,8 +60,8 @@ public class TestService {
         @Test
         public void testevent() {
 
-            GeoEvent event = new GeoEvent("XXXYY",11.22,22.34);
-            GeoEvent event2 = new GeoEvent("YYZZ",21.22,24.34);
+            GeoEvent event = new GeoEvent(1,11.22,22.34);
+            GeoEvent event2 = new GeoEvent(2,21.22,24.34);
             try {
                 HttpEntity<GeoEvent> eventsHttpEntity = new RequestEntity<GeoEvent>(event, HttpMethod.POST,new URI(TEST_URI));
                 ResponseEntity<GeoEvent> ud= t.postForEntity(TEST_URI, eventsHttpEntity, GeoEvent.class );

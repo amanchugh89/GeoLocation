@@ -5,7 +5,6 @@ import com.bhati.entity.GeoEvent;
 import com.bhati.entity.UserDetails;
 import com.bhati.repository.GeoEventRepository;
 import com.bhati.repository.UserDetailsRepository;
-import com.bhati.util.Constants;
 import com.bhati.validations.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.Set;
+import javax.annotation.PostConstruct;
 import javax.ws.rs.Consumes;
 
 /**
@@ -48,6 +48,10 @@ public class GeoController {
 //    @Consumes("application/json")
     public void addEvent(@RequestBody GeoEvent event){
         if(event!=null ||isGeoEventValid(event)){
+            event.setuserId(event.getId());
+            event.setId(0);
+            UserDetails userDetails =userDao.findOne(event.getuserId());
+            event.setUserDetails(userDetails);
             eventDao.put(event);
             if(isEventPersistanceEnabled)
                 eventRepository.save(event);
@@ -60,8 +64,8 @@ public class GeoController {
     }
 
     @RequestMapping(value = "/getGeoAll", method = RequestMethod.GET)
-    public Set<GeoEvent> getAllGeoLocation(){
-        Set<GeoEvent> eventSet = eventDao.getAll();
+    public Set<Object> getAllGeoLocation(){
+        Set<Object> eventSet = eventDao.getAll();
         return eventSet;
     }
 
@@ -76,5 +80,11 @@ public class GeoController {
         return true;
     }
 
+    @PostConstruct
+void initMap(){
+        eventRepository.findLatestDistinctEvents().forEach((p) -> {
+            p.setUserDetails(userDao.findOne(p.getuserId()));
+            eventDao.put(p);});
 
+}
 }

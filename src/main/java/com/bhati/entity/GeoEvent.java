@@ -11,14 +11,15 @@ import java.util.Date;
 @Entity
 @Table(name = "geo_event")
 @Access(value = AccessType.FIELD)
+@NamedQueries( {@NamedQuery(name = "GeoEvent.findLatestDistinctEvents",query = " Select G from  GeoEvent G WHERE G.timestamp = (Select Max(e.timestamp) from GeoEvent e where  G.userId=e.userId)")})
 public class GeoEvent implements Persistable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    @Column(name = "device_id")
-    private String deviceId;
+    @Column(name = "user_id")
+    private long userId;
     @Column(name = "latitude")
     private double latitude;
     @Column(name = "longitude")
@@ -26,11 +27,22 @@ public class GeoEvent implements Persistable<Long> {
     @Column(name = "timestamp")
     private long timestamp = new Date().getTime();
 
+    @Transient
+    private UserDetails userDetails;
+
+    public UserDetails getUserDetails() {
+        return userDetails;
+    }
+
+    public void setUserDetails(UserDetails userDetails) {
+        this.userDetails = userDetails;
+    }
+
     public GeoEvent(){
     }
 
-    public GeoEvent(String deviceId,double latitude , double  longitude){
-        this.deviceId=deviceId;
+    public GeoEvent(long userId,double latitude , double  longitude){
+        this.userId = userId;
         this.latitude=latitude;
         this.longitude=longitude;
         this.timestamp = new Date().getTime();
@@ -50,12 +62,12 @@ public class GeoEvent implements Persistable<Long> {
         this.id = id;
     }
 
-    public String getdeviceId() {
-        return deviceId;
+    public long getuserId() {
+        return userId;
     }
 
-    public void setdeviceId(String deviceId) {
-         this.deviceId = deviceId;
+    public void setuserId(long deviceId) {
+         this.userId = deviceId;
     }
 
 
@@ -88,7 +100,7 @@ public class GeoEvent implements Persistable<Long> {
     public String toString() {
         return "GeoEvent{" +
                 "id=" + id +
-                "deviceId=" + deviceId +
+                "userId=" + userId +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
                 ", timestamp=" + timestamp +
