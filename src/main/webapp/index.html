@@ -13,43 +13,61 @@
       #map {
         height: 100%;
       }
-
-      button {
-          background: #2ecc71;
-          border: 0;
-          color: white;
-          font-weight: bold;
-          font-family: "Monaco", monospace;
-          padding: 10px;
-          border-radius: 4px;
-          cursor: pointer;
-          transition: background-color 0.5s ease;
-          margin: 2px;
-      }
-      button:hover {
-          background: #27ae60;
-      }
     </style>
   </head>
   <body>
-  <header>
-      <button id="reload"> Reload </button>
-  </header>
     <div id="map"></div>
 	    <script 
 		src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="js/marker.js"></script>
+    <script>
+
+<!-- 	$(document).ready(function () { -->
+function initMap() {
+
+$.get("getGeoAll", function(data){
+	var response = data;
+	 var myLatLng1 = {lat: 28, lng:  77};
+ 
+ var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 8,
+    center: myLatLng1
+  });
+
+  
+for( i =0; i<response.length; i++)
+{
+	var myLatLng = {'lat':response[i].latitude, 'lng': response[i].longitude };
+	
+	  var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+    title: String(response[i].id)
+  });
+}
 
 
+});
+
+
+
+
+
+
+	//var myLatLng  = response[i].latitude
+
+}
+
+<!-- }); -->
+
+//  var myLatLng = {lat: -25.363, lng: 131.044};
 
  
  
 
 
-
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCet4_h0lHNadlxh4IIpUFiuqzY6fjGBnM&signed_in=true&callback=initMap"></script>
-
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCet4_h0lHNadlxh4IIpUFiuqzY6fjGBnM&signed_in=true&callback=initMap"></script>
 
   </body>
 </html>
