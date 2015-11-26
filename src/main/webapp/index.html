@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -20,55 +21,88 @@
 	    <script 
 		src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script>
-	var myLatLng1 = {lat: 28.441193, lng:  77.199203};
-		 
-	var map;
-	
-	var getBusLoc = function(){	
-		$.get("getGeoAll", function(data){
-			var response = data;				
-			for( i =0; i<response.length && response[i].userDetails!=null; i++){
-				var dt = new Date(response[i].timestamp),
-					time = dt.getHours()+":"+dt.getMinutes();
-				var marker = new google.maps.Marker({
-					position: {'lat':response[i].latitude, 'lng': response[i].longitude },
-					map: map,
-					title: response[i].userId + ". Last updated at : "+time +" for User "+ response[i].userDetails.name,
-					icon: {
-					  path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-					  scale: 3
-					}
-				});
-			}
-		});
-	}	
-	
-	function initMap() {
+	var TRACKER = (function(){
+		var map, markers = [], infoBoxes = [];
 
-        map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 11,
-            center: myLatLng1
-        });
+		var initMap = function() {
+			map = new google.maps.Map(document.getElementById('map'), {
+				zoom: 11,
+				center: {lat: 28.441193, lng:  77.199203}
+			});
 
-		var marker = new google.maps.Marker({
-			position: myLatLng1,
-			map: map,
-			title: "Bhati",
-			icon: {
-			  path: google.maps.SymbolPath.CIRCLE,
-			  scale: 5,
-			  strokeColor: "#689f38"
-			}
-		});
-        getBusLoc();
-		setInterval(function(){
+			var marker = new google.maps.Marker({
+				position: {lat: 28.441193, lng:  77.199203},
+				map: map,
+				title: "Bhati",
+				icon: {
+				  path: google.maps.SymbolPath.CIRCLE,
+				  scale: 5,
+				  strokeColor: "#689f38"
+				}
+			});
+			
 			getBusLoc();
-		}, 30*1000);
-	}
+			setInterval(function(){
+				getBusLoc();
+			}, 30*1000);
+		};
+		
+		var getBusLoc = function(){
+			$.get("getGeoAll", function(data){
+				var response = data;
+	
+				clearMarkers();
+				
+				for( i =0; i<response.length; i++){
+					if (response[i].userDetails){
+						var dt = new Date(response[i].timestamp),
+							time = ((dt.getHours() > 10) ? dt.getHours() : ("0"+dt.getHours()))+":"+ ((dt.getMinutes() > 10) ? dt.getMinutes() : ("0"+dt.getMinutes())),
+							contentString = "<p style='margin: 0;'>"+response[i].userDetails.center+"</p><p style='margin: 0;'>"+response[i].userDetails.vehicleNumber+"</p><p style='margin: 0;'>"+time+"</p>";
+
+						markers[i] = new google.maps.Marker({
+							position: {'lat':response[i].latitude, 'lng': response[i].longitude },
+							map: map,
+							title: response[i].userId + ". Last updated at : "+time +" for User "+ ((response[i].userDetails && response[i].userDetails.name) ? response[i].userDetails.name : ""),
+							icon: {
+							  path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+							  scale: 3
+							}
+						});
+							
+						infoBoxes[i]= new google.maps.InfoWindow({
+							content: contentString
+						});
+						
+						(function(i){
+							markers[i].addListener('click', function() {							
+								infoBoxes[i].open(map, markers[i]);													
+							});
+						})(i);	
+					}
+				}
+			});
+		};
+		
+		var setMarkerOnMap = function(map){
+			for (var i = 0; i < markers.length; i++) {
+				markers[i].setMap(map);
+			}
+		}
+		
+		var clearMarkers = function(){
+			setMarkerOnMap(null);
+			markers = [];
+			infoBoxes = [];
+		}
+		return{
+			initMap : initMap
+		}
+	})();
+	
 
     </script>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCet4_h0lHNadlxh4IIpUFiuqzY6fjGBnM&signed_in=true&callback=initMap"></script>
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCet4_h0lHNadlxh4IIpUFiuqzY6fjGBnM&signed_in=true&callback=TRACKER.initMap"></script>
 
   </body>
 </html>

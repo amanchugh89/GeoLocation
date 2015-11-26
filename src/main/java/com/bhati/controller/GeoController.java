@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.ws.rs.Consumes;
@@ -78,6 +81,24 @@ public class GeoController {
     public boolean isGeoEventValid(GeoEvent event)
     {
         return true;
+    }
+
+
+    @RequestMapping("/trackUser/{id}")
+    public Set<GeoEvent> trackUser(@PathVariable long id){
+        Set<GeoEvent> geoEvents = new HashSet<>();
+        if(userDao.findOne(id)!=null);
+        eventRepository.findByuserId(id).
+                forEach((p)-> {p.setUserDetails(userDao.findOne(p.getuserId()));
+                geoEvents.add(p);});
+return geoEvents;
+    }
+
+    @RequestMapping("/getAllUsers")
+    public Set<UserDetails> getAllUsers(){
+        Set<UserDetails> l = new HashSet<>();
+        userDao.findAll().forEach((p)-> l.add(p));
+        return l;
     }
 
     @PostConstruct
