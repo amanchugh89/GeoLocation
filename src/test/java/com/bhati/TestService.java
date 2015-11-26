@@ -58,8 +58,8 @@ public class TestService {
 }
 
         public void testevent() {
-            GeoEvent event = new GeoEvent(123l, 23.4, 12.2, 312121l);
-            GeoEvent event1 = new GeoEvent(113l, 23.4, 12.2, 312121l);
+            GeoEvent event = new GeoEvent(123l, 23.4, 12.2);
+            GeoEvent event1 = new GeoEvent(113l, 23.4, 12.2);
             mao.put(event);
             mao.put(event1);
             assertEquals(mao.get(123l), event);
