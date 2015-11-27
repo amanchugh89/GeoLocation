@@ -11,5 +11,7 @@ import java.util.List;
 public interface UserDetailsRepository extends CrudRepository<UserDetails,Long> {
 
     UserDetails findByMobile(Long mobile);
+    UserDetails findByid(Long id);
     List<UserDetails> findByName(Long name);
+
 }

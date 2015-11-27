@@ -59,7 +59,7 @@
 							time = ((dt.getHours() > 10) ? dt.getHours() : ("0"+dt.getHours()))+":"+ ((dt.getMinutes() > 10) ? dt.getMinutes() : ("0"+dt.getMinutes())),
 							contentString = "<p style='margin: 0;'>"+response[i].userDetails.center+"</p><p style='margin: 0;'>"+response[i].userDetails.vehicleNumber+"</p><p style='margin: 0;'>"+time+"</p>";
 
-						markers[i] = new google.maps.Marker({
+s						markers[i] = new google.maps.Marker({
 							position: {'lat':response[i].latitude, 'lng': response[i].longitude },
 							map: map,
 							title: response[i].userId + ". Last updated at : "+time +" for User "+ ((response[i].userDetails && response[i].userDetails.name) ? response[i].userDetails.name : ""),
