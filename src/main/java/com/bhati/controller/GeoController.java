@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
 import javax.ws.rs.Consumes;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.HashSet;
 import java.util.Set;
@@ -67,10 +68,11 @@ public class GeoController {
     @RequestMapping(value = "/getGeoForUsers", method = RequestMethod.POST)
     public Set<GeoEvent> getEventsForUsers(@RequestBody Set<Long> userList) {
         Set<GeoEvent> geoEvents = new HashSet<>();
-        userList.stream().filter((p) -> userDao.findOne(p) != null ).forEach((p) -> {
-            if(eventDao.get(p)!=null)
-            geoEvents.add(eventDao.get(p));
-            System.out.println(p);});
+        userList.stream().filter((p) -> userDao.findOne(p) != null).forEach((p) -> {
+            if (eventDao.get(p) != null)
+                geoEvents.add(eventDao.get(p));
+            System.out.println(p);
+        });
         return geoEvents;
     }
 
@@ -80,8 +82,8 @@ public class GeoController {
     }
 
     @RequestMapping(value = "/getGeoAll", method = RequestMethod.GET)
-    public Set<Object> getAllGeoLocation() {
-        Set<Object> eventSet = eventDao.getAll();
+    public Set<GeoEvent> getAllGeoLocation() {
+        Set<GeoEvent> eventSet = eventDao.getAll();
         return eventSet;
     }
 
@@ -97,18 +99,18 @@ public class GeoController {
 
 
     @RequestMapping(value = "/trackUser/{id}/{from}/{to}", method = RequestMethod.GET)
-    public Set<GeoEvent>trackUser(@PathVariable long id, @PathVariable long from, @PathVariable long to) {
-        Set<GeoEvent> geoEvents = new TreeSet<>((p1,p2)->p1.getId().intValue()-p2.getId().intValue());
+    public Set<GeoEvent> trackUser(@PathVariable long id, @PathVariable long from, @PathVariable long to) {
+        Set<GeoEvent> geoEvents = new TreeSet<>((p1, p2) -> p1.getId().intValue() - p2.getId().intValue());
         if (userDao.findOne(id) != null)
-        eventRepository.findByuserId(id).
-                forEach((p) -> {
-                    p.setUserDetails(userDao.findOne(p.getuserId()));
-                    if(p.getUserDetails()!= null) {
-                       if(p.getTimestamp()>= from && p.getTimestamp() <= to){
-                           geoEvents.add(p);
-                       }
-                    }
-                });
+            eventRepository.findByuserId(id).
+                    forEach((p) -> {
+                        p.setUserDetails(userDao.findOne(p.getuserId()));
+                        if (p.getUserDetails() != null) {
+                            if (p.getTimestamp() >= from && p.getTimestamp() <= to) {
+                                geoEvents.add(p);
+                            }
+                        }
+                    });
         return geoEvents;
     }
 
@@ -117,6 +119,17 @@ public class GeoController {
         Set<UserDetails> l = new HashSet<>();
         userDao.findAll().forEach((p) -> l.add(p));
         return l;
+    }
+
+    @RequestMapping(value = "/getNoUpdates/{min}",method = RequestMethod.GET)
+    public Set<GeoEvent> getNoUpdateSince(@PathVariable int min) {
+        Set<GeoEvent> userDetailses = new HashSet<>();
+        eventDao.getAll().stream().filter((p) -> {
+            return LocalDateTime.ofEpochSecond(p.getTimestamp(), 0, ZoneOffset.UTC).getMinute()
+                    - LocalDateTime.now(ZoneId.of("UTC")).getMinute() >= min;
+        }).forEach((p) -> userDetailses.add(p));
+        return userDetailses;
+
     }
 
     @PostConstruct

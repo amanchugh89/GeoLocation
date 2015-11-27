@@ -17,5 +17,5 @@ public interface GeoEventDao {
     public GeoEvent get(long id);
 
 
-    public HashSet<Object> getAll();
+    public HashSet<GeoEvent> getAll();
 }

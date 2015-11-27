@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by aman on 22/11/15.
@@ -14,7 +15,7 @@ import java.util.*;
 @Scope("singleton")
 public class GeoEventMao implements GeoEventDao {
 
-    private Map<Long, GeoEvent> map = new HashMap<>();
+    private Map<Long, GeoEvent> map = new ConcurrentHashMap<>();
 
     @Override
     public void put(GeoEvent event) {
@@ -37,8 +38,8 @@ public class GeoEventMao implements GeoEventDao {
 
 
     @Override
-    public HashSet<Object> getAll() {
-        HashSet<Object> events = new HashSet<>();
+    public HashSet<GeoEvent> getAll() {
+        HashSet<GeoEvent> events = new HashSet<>();
         for(Map.Entry entry : map.entrySet()){
             events.add(map.get(entry.getKey()));
         }
