@@ -87,7 +87,7 @@ public class GeoController {
     }
 
     @RequestMapping(value = "/getGeoAll/{hour}", method = RequestMethod.GET)
-    public Set<GeoEvent> getAllGeoLocation(int hour) {
+    public Set<GeoEvent> getAllGeoLocation(Integer hour) {
         Set<GeoEvent> eventSet = new HashSet<>();
                 eventDao.getAll().stream().filter((p)-> LocalDateTime.now(ZoneId.of("UTC")).getHour()
                 -LocalDateTime.ofEpochSecond(p.getTimestamp(), 0, ZoneOffset.UTC).getHour()<=hour).forEach((p)->eventSet.add(p));
