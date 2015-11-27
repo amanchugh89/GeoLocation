@@ -37,7 +37,6 @@ public class GeoController {
     boolean isEventPersistanceEnabled;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-   // @Consumes("application/json")
     @Consumes("application/json")
     public UserDetails register(@RequestBody UserDetails userDetails){
         if(userDetails!=null && isUserDetailsValid(userDetails)){
