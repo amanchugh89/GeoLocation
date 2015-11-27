@@ -104,7 +104,7 @@ var TRACKER = (function(){
 	};
 	
 	var getBusLoc = function(){
-		$.get("getGeoAll", function(data){
+		$.get("getGeoAll/12", function(data){
 		//$.get("test.json", function(data){
 			var response = JSON.parse(data);
 
