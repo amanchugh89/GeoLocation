@@ -106,7 +106,8 @@ var TRACKER = (function(){
 	var getBusLoc = function(){
 		$.get("getGeoAll/12", function(data){
 		//$.get("test.json", function(data){
-			var response = JSON.parse(data);
+			//var response = JSON.parse(data);
+			var response = (data);
 
 			clearMarkers();
 			
@@ -157,8 +158,8 @@ var TRACKER = (function(){
 	var getUserList = function(){
 		$.get("getAllUsers", function(data){
 		//$.get("user.json", function(data){
-			var response = JSON.parse(data);
-			
+		//	var response = JSON.parse(data);
+			var response=data;
 			// populate filter list
 			var $filterWrap = $('.filter-wrap'),
 				$transportSelect = $('.transport'),
