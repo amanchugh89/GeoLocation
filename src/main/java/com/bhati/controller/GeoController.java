@@ -5,6 +5,7 @@ import com.bhati.entity.GeoEvent;
 import com.bhati.entity.UserDetails;
 import com.bhati.repository.GeoEventRepository;
 import com.bhati.repository.UserDetailsRepository;
+import com.bhati.util.Utilities;
 import com.bhati.validations.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,6 +38,9 @@ public class GeoController {
 
     @Value("${event.persistance}")
     boolean isEventPersistanceEnabled;
+
+    @Value("${event.threshold}")
+    private double threshold;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @Consumes("application/json")
@@ -135,16 +139,24 @@ public class GeoController {
 
     }
 
-
+@RequestMapping(value = "/getSteadyUsers",method = RequestMethod.GET)
     public Set<GeoEvent> getSteadyUsers(){
         Set<GeoEvent> geoEvents = new HashSet<>();
         userDao.findAll().forEach((p)-> {
 
             List<GeoEvent> eventList =eventRepository.findByuserId(p.getId());
             eventList.sort((p1,p2)->p2.getId().intValue()-p1.getId().intValue());
-            eventList.stream().limit(2).forEach();
+            eventList.stream().limit(2).reduce((p1,p2)-> {
+                double d=Utilities.getDistanceFromLatLonInKm(p1.getLatitude(),p1.getLongitude(),p2.getLatitude(),p2.getLongitude());
+          long time = p1.getTimestamp()-p2.getTimestamp();
+              time=  time==0? 1:time;
+                if(d/time > threshold){
+                    geoEvents.add(p1);
+                }
+                return p1;
+            });
         });
-
+        return geoEvents;
     }
 
     @PostConstruct

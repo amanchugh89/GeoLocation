@@ -14,7 +14,7 @@ public class Utilities {
         return timestamp;
     }
 
-   public double getDistanceFromLatLonInKm(long lat1,long lon1,long lat2,long lon2) {
+   public static double getDistanceFromLatLonInKm(double lat1, double lon1, double lat2, double lon2) {
         int R = 6371; // Radius of the earth in km
         double dLat = deg2rad(lat2-lat1);  // deg2rad below
         double dLon = deg2rad(lon2-lon1);
@@ -28,7 +28,7 @@ public class Utilities {
         return d.intValue();
     }
 
-    double deg2rad(long deg) {
+    static double deg2rad(double deg) {
         return deg * (Math.PI/180);
     }
 }
