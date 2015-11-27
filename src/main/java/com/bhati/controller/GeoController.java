@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -81,9 +82,11 @@ public class GeoController {
         return eventDao.get(id);
     }
 
-    @RequestMapping(value = "/getGeoAll", method = RequestMethod.GET)
-    public Set<GeoEvent> getAllGeoLocation() {
-        Set<GeoEvent> eventSet = eventDao.getAll();
+    @RequestMapping(value = "/getGeoAll/{hour}", method = RequestMethod.GET)
+    public Set<GeoEvent> getAllGeoLocation(int hour) {
+        Set<GeoEvent> eventSet = new HashSet<>();
+                eventDao.getAll().stream().filter((p)-> LocalDateTime.now(ZoneId.of("UTC")).getHour()
+                -LocalDateTime.ofEpochSecond(p.getTimestamp(), 0, ZoneOffset.UTC).getHour()<=hour).forEach((p)->eventSet.add(p));
         return eventSet;
     }
 
@@ -129,6 +132,18 @@ public class GeoController {
                     - LocalDateTime.now(ZoneId.of("UTC")).getMinute() >= min;
         }).forEach((p) -> userDetailses.add(p));
         return userDetailses;
+
+    }
+
+
+    public Set<GeoEvent> getSteadyUsers(){
+        Set<GeoEvent> geoEvents = new HashSet<>();
+        userDao.findAll().forEach((p)-> {
+
+            List<GeoEvent> eventList =eventRepository.findByuserId(p.getId());
+            eventList.sort((p1,p2)->p2.getId().intValue()-p1.getId().intValue());
+            eventList.stream().limit(2).forEach();
+        });
 
     }
 
