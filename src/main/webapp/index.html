@@ -1,108 +1,32 @@
 
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Simple markers</title>
-    <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #map {
-        height: 100%;
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="map"></div>
-	    <script 
-		src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script>
-	var TRACKER = (function(){
-		var map, markers = [], infoBoxes = [];
-
-		var initMap = function() {
-			map = new google.maps.Map(document.getElementById('map'), {
-				zoom: 11,
-				center: {lat: 28.441193, lng:  77.199203}
-			});
-
-			var marker = new google.maps.Marker({
-				position: {lat: 28.441193, lng:  77.199203},
-				map: map,
-				title: "Bhati",
-				icon: {
-				  path: google.maps.SymbolPath.CIRCLE,
-				  scale: 5,
-				  strokeColor: "#689f38"
-				}
-			});
+    <div id="map" class="dib">
+	</div><div id="side-bar" class="dib">
+		<h2>Select from the SelectBox below</h2>
+		<select class="map-option">
+			<option value="map">Show All</option>
+			<option value="filter">Filter Transport</option>
+			<option value="single">Single Transport</option>
+		</select>
+		<ul class="filter-wrap options hidden">
 			
-			getBusLoc();
-			setInterval(function(){
-				getBusLoc();
-			}, 30*1000);
-		};
-		
-		var getBusLoc = function(){
-			$.get("getGeoAll/12", function(data){
-				var response = data;
-	
-				clearMarkers();
-				
-				for( i =0; i<response.length; i++){
-					if (response[i].userDetails){
-						var dt = new Date(response[i].timestamp),
-							time = ((dt.getHours() > 10) ? dt.getHours() : ("0"+dt.getHours()))+":"+ ((dt.getMinutes() > 10) ? dt.getMinutes() : ("0"+dt.getMinutes())),
-							contentString = "<p style='margin: 0;'>"+response[i].userDetails.center+"</p><p style='margin: 0;'>"+response[i].userDetails.vehicleNumber+"</p><p style='margin: 0;'>"+time+"</p>";
-
-						markers[i] = new google.maps.Marker({
-							position: {'lat':response[i].latitude, 'lng': response[i].longitude },
-							map: map,
-							title: response[i].userId + ". Last updated at : "+time +" for User "+ ((response[i].userDetails && response[i].userDetails.name) ? response[i].userDetails.name : ""),
-							icon: {
-							  path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-							  scale: 3
-							}
-						});
-							
-						infoBoxes[i]= new google.maps.InfoWindow({
-							content: contentString
-						});
-						
-						(function(i){
-							markers[i].addListener('click', function() {							
-								infoBoxes[i].open(map, markers[i]);													
-							});
-						})(i);	
-					}
-				}
-			});
-		};
-		
-		var setMarkerOnMap = function(map){
-			for (var i = 0; i < markers.length; i++) {
-				markers[i].setMap(map);
-			}
-		}
-		
-		var clearMarkers = function(){
-			setMarkerOnMap(null);
-			markers = [];
-			infoBoxes = [];
-		}
-		return{
-			initMap : initMap
-		}
-	})();
-	
-
-    </script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCet4_h0lHNadlxh4IIpUFiuqzY6fjGBnM&signed_in=true&callback=TRACKER.initMap"></script>
+		</ul>
+		<div class="single-wrap options hidden">
+			<select class="transport"></select>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="main.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCet4_h0lHNadlxh4IIpUFiuqzY6fjGBnM&signed_in=true&callback=TRACKER.initMap"></script>
 
   </body>
 </html>

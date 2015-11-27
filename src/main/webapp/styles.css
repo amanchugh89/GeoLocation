@@ -1,0 +1,13 @@
+ html, body {height: 100%; margin: 0; padding: 0;}
+.hidden{display: none !important;}
+.dib{display: inline-block; vertical-align: top;}
+
+#map {height: 100%; width: 80%;}
+#side-bar{width: 20%; padding: 5px; box-sizing: border-box; height: 100%; overflow: auto;}
+#side-bar h2{text-align: center; font: 20px/1.2em Arial;}
+.map-option{width: 90%; height: 30px; margin: 10px auto; display: block;}
+ul.filter-wrap{padding: 0; list-style: none; width: 90%; margin: 0 auto;}
+ul.filter-wrap li input{width: 20px; height: 20px; margin-right: 10px;}
+ul.filter-wrap li label{font: 14px/1.2em Arial; vertical-align: top; padding-top: 5px; display: inline-block;}
+.single-wrap{width: 90%; margin: 0 auto;}
+.single-wrap select{width: 100%; height: 30px; margin: 10px auto;}
