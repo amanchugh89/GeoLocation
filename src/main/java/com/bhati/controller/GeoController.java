@@ -3,6 +3,8 @@ package com.bhati.controller;
 import com.bhati.dao.GeoEventDao;
 import com.bhati.entity.GeoEvent;
 import com.bhati.entity.UserDetails;
+import com.bhati.exception.MDAResponse;
+import com.bhati.exception.ValidationException;
 import com.bhati.repository.GeoEventRepository;
 import com.bhati.repository.UserDetailsRepository;
 import com.bhati.util.Utilities;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -41,6 +44,9 @@ public class GeoController {
 
     @Value("${event.threshold}")
     private double threshold;
+
+    @Autowired
+    private Utilities utilities;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @Consumes("application/json")
@@ -89,8 +95,9 @@ public class GeoController {
     @RequestMapping(value = "/getGeoAll/{hour}", method = RequestMethod.GET)
     public Set<GeoEvent> getAllGeoLocation(@PathVariable Integer hour) {
         Set<GeoEvent> eventSet = new HashSet<>();
-                eventDao.getAll().stream().filter((p)-> LocalDateTime.now(ZoneId.of("UTC")).getHour()
-                -LocalDateTime.ofEpochSecond(p.getTimestamp(), 0, ZoneOffset.UTC).getHour()<=hour).forEach((p)->eventSet.add(p));
+                eventDao.getAll().stream().filter((p) -> p.getTimestamp() >
+                                LocalDateTime.now(ZoneOffset.UTC).minusHours(hour).toInstant(ZoneOffset.UTC).toEpochMilli()
+                ).forEach((p) -> eventSet.add(p));
         return eventSet;
     }
 
@@ -132,8 +139,7 @@ public class GeoController {
     public Set<GeoEvent> getNoUpdateSince(@PathVariable int min) {
         Set<GeoEvent> userDetailses = new HashSet<>();
         eventDao.getAll().stream().filter((p) -> {
-            return LocalDateTime.ofEpochSecond(p.getTimestamp(), 0, ZoneOffset.UTC).getMinute()
-                    - LocalDateTime.now(ZoneId.of("UTC")).getMinute() >= min;
+            return p.getTimestamp() >=LocalDateTime.ofEpochSecond(p.getTimestamp(), 0, ZoneOffset.UTC).minusMinutes(min).toInstant(ZoneOffset.UTC).toEpochMilli();
         }).forEach((p) -> userDetailses.add(p));
         return userDetailses;
 
@@ -165,6 +171,14 @@ public class GeoController {
             p.setUserDetails(userDao.findOne(p.getuserId()));
             eventDao.put(p);
         });
+
+    }
+
+    @ExceptionHandler(Exception.class)
+    public String handleError(HttpServletRequest request, Exception e) {
+        utilities.send(e.getMessage());
+
+        return "Error received: " + e.getMessage();
 
     }
 }

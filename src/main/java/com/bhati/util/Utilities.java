@@ -1,12 +1,31 @@
 package com.bhati.util;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Component;
+
+import javax.mail.internet.MimeMessage;
+
 /**
  * Created by aman on 22/11/15.
  */
+@Component
 public class Utilities {
+
+    @Autowired
+    private JavaMailSender javaMailSender;
 
     public static void toJson(){
 
+    }
+
+    public MimeMessage send(String message) {
+        MimeMessage mailMessage =javaMailSender.createMimeMessage();
+
+        
+        javaMailSender.send(mailMessage);
+        return mailMessage;
     }
 
     public static long getTimeStamp(){

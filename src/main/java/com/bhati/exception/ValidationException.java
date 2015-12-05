@@ -3,6 +3,7 @@ package com.bhati.exception;
 /**
  * Created by esuchug on 30-06-2015.
  */
+
 public class ValidationException extends Exception {
 
 
