@@ -2,5 +2,11 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/bhati/security/BIMSServiceAccessor.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/bhati/security/types/AreaList.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/bhati/security/types/CentreList.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/bhati/security/types/GetAreasResult.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/bhati/security/types/GetCentresResult.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/bhati/security/types/MySimpleClientHttpRequestFactory.java" charset="windows-1252" />
   </component>
 </project>

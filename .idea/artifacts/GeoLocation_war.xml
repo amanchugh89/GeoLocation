@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="war" name="GeoLocation:war">
     <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="geoLocation-0.0.1-SNAPSHOT.war">
+    <root id="archive" name="GeoLocation-1.3.0.RELEASE.war">
       <element id="artifact" artifact-name="GeoLocation:war exploded" />
     </root>
   </artifact>

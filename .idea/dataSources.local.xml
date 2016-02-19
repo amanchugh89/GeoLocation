@@ -6,5 +6,9 @@
       <first-sync>true</first-sync>
       <user-name>swqnbbybzxxfsm</user-name>
     </data-source>
+    <data-source name="Informix - localhost" uuid="d59a46fc-bf2f-4bab-b618-e65111763da8">
+      <secret-storage>master_key</secret-storage>
+      <user-name>informix</user-name>
+    </data-source>
   </component>
 </project>
