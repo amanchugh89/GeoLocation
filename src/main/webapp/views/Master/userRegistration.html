@@ -1,0 +1,169 @@
+<!doctype HTML>
+<html>
+	<head>
+		<title>User Registration</title>
+		<link rel = "stylesheet" href="views/Common/css/jquery-ui.css"/>
+		<link rel="stylesheet" href="views/Common/css/reusable.css"/>
+		<link rel="stylesheet" href="views/Common/css/responsive.css"/>
+		<link rel="stylesheet" href="views/Master/css/userRegistration.css" />
+	</head>
+	<body>
+		<header>
+			<div class="page-header">
+				<img class="rssb-logo fl" src="views/Common/images/logo.gif" alt="RSSB Logo">
+				<div class="top-section">
+					<p class="BIMS-heading arial-black">Bhati Information Management System</p>
+					<div class="mobile-mid-section">
+						<div class="top-blue"></div>
+						<div class="bottom-blue"></div>
+						<div class="BIMS-heading">B.I.M.S</div>
+					</div>
+					<a class="mobile-menu"></a>
+				</div>
+				<div class="bottom-section">
+					<div class="menu-links fr">
+						<a href="views/Common/WebPages/MainMenu.aspx" id="ctl00_Header1_mainMenu" class="main-menu-link">Main Menu</a>
+						<span class="divider">| </span>
+						<a href="views/Common/WebPages/ChangePassword.aspx?" id="ctl00_Header1_hrefChangePassword" class="cLinks">Change Password</a>
+						<span class="divider">| </span>
+						<a id="ctl00_Header1_Logout" class="cLinks" href="logout"><u>Logout</u></a>
+						<div class="account-links">
+							<a href="views/views/BIMS_DeptUserManual.pdf" target="_blank">BIMS User Manual</a>
+							<span class="divider">| </span>
+							<a href="http://172.21.0.196/support/" target="_blank">Facing Problem?</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>	
+		<div id="user-reg" class="section-wrap">
+            <div class = "page-container">
+                <h1>User Registration</h1>
+				<div class="quick-links">
+
+					<a href="map">Map</a>
+
+				</div>
+
+                <fieldset class="resp-form wrap">
+                    <legend>Registration of user</legend>
+					<div class="general-errors hidden">
+						<p data-errorId=""></p>
+					</div>					
+					<div class="mob-reg-wrap">
+
+						<ul id="mobile-reg-ul" class="form-fields-wrap col-3 dib">
+							<li class = "dib validation-parent top-pad">
+								<label for="area">Area * </label><select id="area"
+																		   data-bind=" options: areaList,
+											optionsCaption: 'Select Area...',
+											optionsValue : 'AreaId',
+											optionsText: 'AreaName',
+											value: $root.model.area"
+																		   required data-validation
+																		   data-error = '{"required" : "Please select an Area."}'>
+							</select>
+							</li><li class = "dib validation-parent top-pad">
+							<label for="center">Center * </label><select id="center"
+																		 data-bind=" options: centerList,
+											optionsCaption: 'Select Center...',
+											optionsValue : 'CentreId',
+											optionsText: 'CentreName',
+											value: $root.model.center"
+																		 required data-validation
+																		 data-error = '{"required" : "Please select a Center."}'>
+						</select>
+							</li>
+							<li class = "dib validation-parent top-pad">
+
+								<label for="mob-num">Mobile Number * </label><input id="mob-num" type = "text" required maxlength="10"
+									data-validation = '{"validmobile" : "true"}'
+									data-error = '{"required" : "Please enter mobile number", "validmobile" : "Please enter valid mobile number"}'
+									data-bind="value: $root.model.mobile"
+								placeholder = "without 0 or +91" maxlength="10"/>
+							</li><li class = "dib validation-parent top-pad">
+								<label for="name">Marshall's Name * </label><input id="name" type = "text" required maxlength="50"
+									data-validation='{"regex": "^[a-zA-Z][a-zA-Z0-9 ]{3,50}$"}'
+									data-error='{"regex": "Please enter valid Name", "required": "Sangat Name is mandatory", "maxlength": "Name cannot be more than 50 characters"}' 
+									data-bind="value: $root.model.name"
+								placeholder = "Enter Sangat's name" />
+							</li><li class = "dib validation-parent top-pad">
+								<label for="badge">Badge No  *</label><input id="badge" type = "text"
+									data-bind="value: $root.model.badge"
+									required data-validation='{"regex": "^[a-zA-Z][a-zA-Z0-9 ]{3,50}$"}'
+									data-error = '{"onlyNumber" : "Please enter valid Badge No in alphanumeric."}'
+								placeholder = "Enter your Badge No" />
+							</li>
+							<li class = "dib validation-parent top-pad">
+								<label for="vehicle-no">Vehicle No  *</label><input id="vehicle-no" type = "text"
+																			 data-bind="value: $root.model.vehicleNumber"
+																			 required data-validation='{"regex": "^[a-zA-Z][a-zA-Z0-9 ]{3,50}$"}'
+																			 data-error = '{"onlyNumber" : "Please enter valid Vehicle/Bus No in alphanumeric."}'
+																			 placeholder = "Enter your Vehicle No" />
+							</li>
+							<li class = "dib validation-parent">
+								<label for="mobile-type">Mobile Type * </label><select id="mobile-type"
+																				   data-bind="value: $root.model.mobileType"
+																				   required data-validation
+																				   data-error = '{"required" : "Please select mobile type."}'>
+								<option value="ANDROID">Android</option>
+								<option value="APPLE">Apple</option>
+								<option value="WINDOWS">Windows</option>
+								<option value="Other">Other</option>
+							</select>
+							</li>
+							<li class="dib validation-parent">
+								<label for="mobile-company">Mobile Company </label><input id="mobile-company" type = "text" maxlength="50"
+									data-bind="value: $root.model.company"
+									data-validation='{"regex": "^[a-zA-Z][a-zA-Z0-9 ]{3,50}$"}'
+									data-error='{"regex": "Please enter valid Name"}' 
+								placeholder = "Enter mobile company" />
+							</li><li class="dib validation-parent">
+								<label for="mobile-model">Mobile Model </label><input id="mobile-model" type = "text" maxlength="50"
+									data-bind="value: $root.model.model"
+									data-error='{"regex": "Please enter valid model"}'
+								placeholder = "Mobile's model no." />
+							</li>
+						</ul>
+
+					</div>
+				</fieldset>
+				<fieldset class="resp-form operating-btn-wrap">
+                    <ul class="form-fields-wrap col-3">
+                        <li class="dib btn-wrap">
+                            <input type="button" value="Discard Changes" class="btn-white" data-bind="click: resetForm">
+                        </li><li class="dib btn-wrap">
+                            <input type="button" value="Save Changes" class="btn-blue" data-bind="click: saveDetails">
+                        </li>
+                    </ul>
+                </fieldset>
+				<ul class="hidden">
+					<li class = "dib validation-parent">
+						<label for="unique-id">Unique ID  </label><input id="unique-id" type = "text" data-bind="value: $root.model.id" />
+					</li><!-- <li class = "dib validation-parent">
+						<label for="counter">Time of Registration: </label><input id="counter" type = "text" data-bind="value: $root.model.regTime" disabled/>
+					</li><li class = "dib validation-parent">
+						<label for="counter">Time of Last Update: </label><input id="counter" type = "text" data-bind="value: $root.model.updatedTime" disabled/>
+					</li><li class = "dib validation-parent">
+						<label for="status">Status*: </label><select id="status" data-bind="value: $root.model.status">
+							<option value="1">Active</option>
+						</select>
+					</li> -->
+				</ul>
+			</div>
+		</div>
+		
+
+		<footer>
+			<p> Copyright &copy; Radha Soami Satsang Beas</p>
+		</footer>
+		<script src="views/Common/js/vendor/jquery.min.js"></script>
+		<script src="views/Common/js/vendor/knockout.latest.min.js"></script>
+		<script src="views/Common/js/vendor/knockout.mapping.js"></script>
+		<script src="views/Common/js/vendor/jqueryUi.js"></script>
+		<script src="views/Common/js/utilities.js"></script>
+		<script src="views/Common/js/responsive.js"></script>	
+		<script src="views/Common/js/autoComplete.js"></script>
+		<script src="views/Master/js/userRegistration.js"></script>
+	</body>
+</html>

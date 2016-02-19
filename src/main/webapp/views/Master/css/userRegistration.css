@@ -1,0 +1,62 @@
+.user-photo {width: 25%; margin: 0; text-align: center;}
+.user-photo img#userPhoto, .user-photo video#userWebCam, #userPhotoCanvas{width: 100%; max-width: 200px; height: auto; max-height: 200px;}
+.user-photo input{width: 100%; max-width: 200px;}
+.fileinput img{width: 200px; height: 200px;}
+#user-reg .mob-reg-wrap{border: 1px solid #6389C6; border-radius: 0 0 5px 5px; padding: 10px;}
+#mobile-reg-ul{width: 75%;}
+#mobile-reg .mob-reg-wrap ul{border: none; padding: 0;}
+ul.form-fields-wrap > li.top-pad{padding-top: 0;}
+ul.form-fields-wrap > li{padding: 7px 1%;}
+.operating-btn-wrap ul{border: none !important;}
+.ui-helper-hidden-accessible{display: none !important;}
+.validation-error input, .validation-error textarea{border: 1px solid #dd4b39 !important;}
+
+.quick-links {position: absolute; right: 25px; top: 25px;}
+.quick-links a{text-decoration: none; background: #e5ecf9; padding: 10px; color: #002B64; border-radius: 5px;
+	-webkit-transition: background 0.2s ease-in-out;
+	-moz-transition: background 0.2s ease-in-out;
+	-o-transition: background 0.2s ease-in-out;
+	-ms-transition: background 0.2s ease-in-out;
+	transition: background 0.2s ease-in-out;
+}
+.quick-links a:hover{background: #D1D8E5;}
+
+.deposite-mobile {position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 999; opacity: 1; 
+	-webkit-transition: opacity 0.2s ease-in-out;
+	-moz-transition: opacity 0.2s ease-in-out;
+	-o-transition: opacity 0.2s ease-in-out;
+	-ms-transition: opacity 0.2s ease-in-out;
+	transition: opacity 0.2s ease-in-out;
+}
+.deposite-mobile h2{margin: 0; padding: 5px 2px; font: bold 25px Arial; color: #333; text-align: center; text-shadow: 1px 1px 5px #888;}
+.deposite-mobile .token-issue-wrap{border: none;width: 400px; background: #fff; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); border-radius: 5px;}
+.deposite-mobile .token-issue-wrap ul{border: none;}
+.deposite-mobile.remove{opacity: 0; z-index: -1 !important;}
+
+.deposite-mobile .close{position: absolute; right: 10px; top: 10px; font: bold 25px Arial; cursor: pointer;}
+.ui-state-hover .ui-icon, .ui-state-focus .ui-icon{background-image: url("../../Common/css/images/ui-icons_222222_256x240.png");}
+.general-errors {position: absolute; right: 0; top: -5px; color: #dd4b39; font: bold 16px/1.2em Arial;}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+	.fileinput img{width: 100%; height: auto;}
+}
+
+@media only screen and (max-width: 767px){
+	fieldset.resp-form.wrap{margin-top: 50px;}
+	.quick-links{right: 0; top: 80px; width: 100%; text-align: center;}
+	.user-photo, #mobile-reg-ul{width: 100%;}
+	.user-photo .fileinput{text-align: center;}
+	.fileinput img, .user-photo img#userPhoto, .user-photo video#userWebCam, #userPhotoCanvas{display: block; margin: 0 auto;}
+	ul.form-fields-wrap > li.top-pad{padding-top: 7px;}
+}
+
+@media only screen and (min-width: 570px) and (max-width: 767px){
+	.operating-btn-wrap ul.form-fields-wrap.col-3 > li{width: 31.33%;}
+}
+
+@media only screen and (max-width: 569px){
+	
+	.operating-btn-wrap ul.form-fields-wrap.col-3 > li{width: 48%;}
+	.operating-btn-wrap ul.form-fields-wrap.col-3 > li:last-child{width: 100%;}
+	.operating-btn-wrap ul.form-fields-wrap.col-3 > li input{width: 98%; max-width: 100%;}
+}
