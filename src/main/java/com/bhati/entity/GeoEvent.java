@@ -28,14 +28,14 @@ public class GeoEvent implements Persistable<Long> {
     private long timestamp = new Date().getTime();
 
     @Transient
-    private UserDetails userDetails;
+    private MarshallDetails marshallDetails;
 
-    public UserDetails getUserDetails() {
-        return userDetails;
+    public MarshallDetails getMarshallDetails() {
+        return marshallDetails;
     }
 
-    public void setUserDetails(UserDetails userDetails) {
-        this.userDetails = userDetails;
+    public void setMarshallDetails(MarshallDetails marshallDetails) {
+        this.marshallDetails = marshallDetails;
     }
 
     public GeoEvent(){

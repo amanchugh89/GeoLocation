@@ -1,33 +1,32 @@
-package com.bhati.controller;
+package com.bhati.controller.rest;
 
 import com.bhati.dao.GeoEventDao;
 import com.bhati.entity.GeoEvent;
-import com.bhati.entity.UserDetails;
-import com.bhati.exception.MDAResponse;
-import com.bhati.exception.ValidationException;
+import com.bhati.entity.MarshallDetails;
 import com.bhati.repository.GeoEventRepository;
 import com.bhati.repository.UserDetailsRepository;
+import com.bhati.security.types.AreaList;
+import com.bhati.security.types.CentreList;
+import com.bhati.security.types.GetAreasResult;
+import com.bhati.security.types.UserDetails;
 import com.bhati.util.Utilities;
 import com.bhati.validations.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Created by aman on 22/11/15.
  */
 @RestController
+@RequestMapping("/rest")
 public class GeoController {
 
     @Autowired
@@ -50,17 +49,18 @@ public class GeoController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @Consumes("application/json")
-    public UserDetails register(@RequestBody UserDetails userDetails) {
-        if (userDetails != null && isUserDetailsValid(userDetails)) {
-            return userDao.save(userDetails);
+    public MarshallDetails register(@RequestBody MarshallDetails marshallDetails) {
+        if (marshallDetails != null && isUserDetailsValid(marshallDetails)) {
+            return userDao.save(marshallDetails);
         }
         return null;
     }
 
     @RequestMapping(value = "/getUser/{id}", method = RequestMethod.GET)
-    public UserDetails getUser(@PathVariable Long id) {
+    public MarshallDetails getUser(@PathVariable Long id) {
         return userDao.findOne(id);
     }
+
 
 
     @RequestMapping(value = "/addEvent", method = RequestMethod.POST)
@@ -68,8 +68,8 @@ public class GeoController {
         if (event != null || isGeoEventValid(event)) {
             event.setuserId(event.getId());
             event.setId(0);
-            UserDetails userDetails = userDao.findOne(event.getuserId());
-            event.setUserDetails(userDetails);
+            MarshallDetails marshallDetails = userDao.findOne(event.getuserId());
+            event.setMarshallDetails(marshallDetails);
             eventDao.put(event);
             if (isEventPersistanceEnabled)
                 eventRepository.save(event);
@@ -102,15 +102,6 @@ public class GeoController {
     }
 
 
-    public boolean isUserDetailsValid(UserDetails userDetails) {
-        if (Validator.isValidOnlyString(userDetails.getName())) ;
-        return true;
-    }
-
-    public boolean isGeoEventValid(GeoEvent event) {
-        return true;
-    }
-
 
     @RequestMapping(value = "/trackUser/{id}/{from}/{to}", method = RequestMethod.GET)
     public Set<GeoEvent> trackUser(@PathVariable long id, @PathVariable long from, @PathVariable long to) {
@@ -118,8 +109,8 @@ public class GeoController {
         if (userDao.findOne(id) != null)
             eventRepository.findByuserId(id).
                     forEach((p) -> {
-                        p.setUserDetails(userDao.findOne(p.getuserId()));
-                        if (p.getUserDetails() != null) {
+                        p.setMarshallDetails(userDao.findOne(p.getuserId()));
+                        if (p.getMarshallDetails() != null) {
                             if (p.getTimestamp() >= from && p.getTimestamp() <= to) {
                                 geoEvents.add(p);
                             }
@@ -129,8 +120,8 @@ public class GeoController {
     }
 
     @RequestMapping(value = "/getAllUsers", method = RequestMethod.GET)
-    public Set<UserDetails> getAllUsers() {
-        Set<UserDetails> l = new HashSet<>();
+    public Set<MarshallDetails> getAllUsers() {
+        Set<MarshallDetails> l = new HashSet<>();
         userDao.findAll().forEach((p) -> l.add(p));
         return l;
     }
@@ -165,14 +156,33 @@ public class GeoController {
         return geoEvents;
     }
 
-    @PostConstruct
+
+    @RequestMapping(value = "/getAreaList", method = RequestMethod.POST)
+    public AreaList getAreaList(HttpServletRequest request)  {
+        UserDetails userDetails =
+                (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        AreaList al = new AreaList();
+        List<GetAreasResult> l = new ArrayList<>();
+        al.setGetAreasResult(l);
+        l.addAll(userDetails.getAreaMap().values());
+        return al;
+    }
+
+
+    @RequestMapping(value = "/getCentreList/{AREAID}", method = RequestMethod.POST)
+    public CentreList getCentreList(@PathVariable String AREAID)  {
+        UserDetails userDetails =
+                (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            return (userDetails.getAreaCMap().get(AREAID));
+    }
+    /*@PostConstruct
     void initMap() {
         eventRepository.findLatestDistinctEvents().forEach((p) -> {
-            p.setUserDetails(userDao.findOne(p.getuserId()));
+            p.setMarshallDetails(userDao.findOne(p.getuserId()));
             eventDao.put(p);
         });
 
-    }
+    }*/
 
     @ExceptionHandler(Exception.class)
     public String handleError(HttpServletRequest request, Exception e) {
@@ -181,4 +191,15 @@ public class GeoController {
         return "Error received: " + e.getMessage();
 
     }
+
+    private boolean isUserDetailsValid(MarshallDetails marshallDetails) {
+        if (Validator.isValidOnlyString(marshallDetails.getName())) ;
+        return true;
+    }
+
+    private boolean isGeoEventValid(GeoEvent event) {
+        return true;
+    }
+
+
 }

@@ -1,17 +1,10 @@
 package com.bhati;
 
-import com.bhati.controller.GeoController;
-import com.bhati.dao.GeoEventDao;
 import com.bhati.dao.impl.GeoEventMao;
 import com.bhati.entity.GeoEvent;
-import com.bhati.entity.UserDetails;
+import com.bhati.entity.MarshallDetails;
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
-import static org.junit.Assert.*;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.EnvironmentTestUtils;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.boot.test.WebIntegrationTest;
@@ -48,10 +41,10 @@ public class TestService {
 
    @Test
     public void registerUser(){
-        UserDetails details = new UserDetails("aman",9999700996l,"bhati","g123", "dl 1100");
+        MarshallDetails details = new MarshallDetails("aman",9999700996l,"bhati","g123", "dl 1100");
         try {
-            HttpEntity<UserDetails> userDetailsHttpEntity = new RequestEntity<UserDetails>(details, HttpMethod.POST,new URI(REGISTER_URI));
-           ResponseEntity<UserDetails> ud= t.postForEntity(REGISTER_URI, details, UserDetails.class );
+            HttpEntity<MarshallDetails> userDetailsHttpEntity = new RequestEntity<MarshallDetails>(details, HttpMethod.POST,new URI(REGISTER_URI));
+           ResponseEntity<MarshallDetails> ud= t.postForEntity(REGISTER_URI, details, MarshallDetails.class );
             assert(!ud.getBody().isNew());
         } catch (URISyntaxException e) {
             e.printStackTrace();
