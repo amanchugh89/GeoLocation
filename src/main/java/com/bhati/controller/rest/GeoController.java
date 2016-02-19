@@ -6,14 +6,11 @@ import com.bhati.entity.MarshallDetails;
 import com.bhati.repository.GeoEventRepository;
 import com.bhati.repository.UserDetailsRepository;
 import com.bhati.security.types.AreaList;
-import com.bhati.security.types.CentreList;
 import com.bhati.security.types.GetAreasResult;
-import com.bhati.security.types.UserDetails;
 import com.bhati.util.Utilities;
 import com.bhati.validations.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -159,22 +156,22 @@ public class GeoController {
 
     @RequestMapping(value = "/getAreaList", method = RequestMethod.POST)
     public AreaList getAreaList(HttpServletRequest request)  {
-        UserDetails userDetails =
-                (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      /*  UserDetails userDetails =
+                (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();*/
         AreaList al = new AreaList();
         List<GetAreasResult> l = new ArrayList<>();
         al.setGetAreasResult(l);
-        l.addAll(userDetails.getAreaMap().values());
+     //   l.addAll(userDetails.getAreaMap().values());
         return al;
     }
 
 
-    @RequestMapping(value = "/getCentreList/{AREAID}", method = RequestMethod.POST)
+   /* @RequestMapping(value = "/getCentreList/{AREAID}", method = RequestMethod.POST)
     public CentreList getCentreList(@PathVariable String AREAID)  {
         UserDetails userDetails =
                 (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             return (userDetails.getAreaCMap().get(AREAID));
-    }
+    }*/
     /*@PostConstruct
     void initMap() {
         eventRepository.findLatestDistinctEvents().forEach((p) -> {

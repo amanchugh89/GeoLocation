@@ -1,3 +1,4 @@
+/*
 package com.bhati.security;
 
 import org.springframework.security.core.AuthenticationException;
@@ -8,9 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+*/
 /**
  * Created by Sumiran Chugh on 1/10/2016.
- */
+ *//*
+
 
 public class HttpEntryPoint implements AuthenticationEntryPoint {
 
@@ -31,3 +34,4 @@ public class HttpEntryPoint implements AuthenticationEntryPoint {
         response.sendRedirect(new StringBuilder(bimsUrl).append("?").append(clientId).toString());
     }
 }
+*/

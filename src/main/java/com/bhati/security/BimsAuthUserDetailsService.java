@@ -1,3 +1,4 @@
+/*
 package com.bhati.security;
 
 import com.bhati.common.Util;
@@ -18,9 +19,11 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+*/
 /**
  * Created by Sumiran Chugh on 1/12/2016.
- */
+ *//*
+
 public class BimsAuthUserDetailsService implements AuthenticationUserDetailsService {
 
     private static final Log logger = LogFactory.getLog(BimsAuthUserDetailsService.class);
@@ -85,3 +88,4 @@ public class BimsAuthUserDetailsService implements AuthenticationUserDetailsServ
 
 
 }
+*/

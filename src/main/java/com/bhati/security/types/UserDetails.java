@@ -1,12 +1,13 @@
 package com.bhati.security.types;
 
 import com.fasterxml.jackson.annotation.*;
-import org.springframework.security.core.GrantedAuthority;
 
 import javax.annotation.Generated;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
@@ -17,7 +18,8 @@ import java.util.stream.Collectors;
         "HasError",
         "User"
 })
-public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
+//public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
+public class UserDetails  {
 
     @JsonProperty("Error")
     private Object Error;
@@ -147,43 +149,43 @@ public class UserDetails implements org.springframework.security.core.userdetail
         this.additionalProperties.put(name, value);
     }
 
-    @Override
+   /* @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getUser().getRoles().stream().map((p) -> {
             GrantedAuthority ga = ()-> p.getRoleName();
             return ga;
         }).collect(Collectors.toList());
-    }
+    }*/
 
 
 
 
-    @Override
+    //@Override
     public String getPassword() {
         return null;
     }
 
-    @Override
+    //@Override
     public String getUsername() {
         return getUser().getUserName();
     }
 
-    @Override
+    //@Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
-    @Override
+    //@Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
-    @Override
+   // @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
-    @Override
+ //   @Override
     public boolean isEnabled() {
         return true;
     }

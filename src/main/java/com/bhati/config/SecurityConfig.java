@@ -1,3 +1,4 @@
+/*
 package com.bhati.config;
 
 import com.bhati.security.BimsAuthUserDetailsService;
@@ -44,7 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers("/rest/**").permitAll().anyRequest().authenticated().and().addFilter(abstractPreAuthenticatedProcessingFilter
+        http.csrf().disable().authorizeRequests().antMatchers("/rest*/
+/**").permitAll().anyRequest().authenticated().and().addFilter(abstractPreAuthenticatedProcessingFilter
         (authenticationManager())).exceptionHandling().authenticationEntryPoint(getAuthEntryPoint());
 
     }
@@ -82,3 +84,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new HttpEntryPoint(bimsUrl,clientId);
     }
 }
+*/
