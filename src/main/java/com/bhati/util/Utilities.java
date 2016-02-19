@@ -12,7 +12,7 @@ import javax.mail.internet.MimeMessage;
 @Component
 public class Utilities {
 
-    @Autowired
+    @Autowired(required = false)
     private JavaMailSender javaMailSender;
 
     public static void toJson(){

@@ -186,7 +186,7 @@ public class GeoController {
 
     @ExceptionHandler(Exception.class)
     public String handleError(HttpServletRequest request, Exception e) {
-        utilities.send(e.getMessage());
+      //  utilities.send(e.getMessage());
 
         return "Error received: " + e.getMessage();
 
