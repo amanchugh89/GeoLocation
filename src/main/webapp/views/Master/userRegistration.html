@@ -54,7 +54,13 @@
 
 						<ul id="mobile-reg-ul" class="form-fields-wrap col-3 dib">
 							<li class = "dib validation-parent top-pad">
-								<label for="area">Area * </label><select id="area"
+								<label for="area">Area * </label>
+								<input id="area" type = "text" required maxlength="10"
+									   data-validation = '{"validarea" : "true"}'
+									   data-error = '{"required" : "Please enter Area", "validarea" : "Please enter valid area"}'
+									   data-bind="value: $root.model.area"
+									   />
+								<!--<select id="area"
 																		   data-bind=" options: areaList,
 											optionsCaption: 'Select Area...',
 											optionsValue : 'AreaId',
@@ -62,9 +68,9 @@
 											value: $root.model.area"
 																		   required data-validation
 																		   data-error = '{"required" : "Please select an Area."}'>
-							</select>
+							</select>-->
 							</li><li class = "dib validation-parent top-pad">
-							<label for="center">Center * </label><select id="center"
+							<label for="center">Center * </label><!--<select id="center"
 																		 data-bind=" options: centerList,
 											optionsCaption: 'Select Center...',
 											optionsValue : 'CentreId',
@@ -72,7 +78,12 @@
 											value: $root.model.center"
 																		 required data-validation
 																		 data-error = '{"required" : "Please select a Center."}'>
-						</select>
+						</select>-->
+							<input id="center" type = "text" required maxlength="10"
+								   data-validation = '{"validcenter" : "true"}'
+								   data-error = '{"required" : "Please enter Center", "validcenter" : "Please enter valid center"}'
+								   data-bind="value: $root.model.center"
+									/>
 							</li>
 							<li class = "dib validation-parent top-pad">
 

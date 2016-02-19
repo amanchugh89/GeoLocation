@@ -52,10 +52,10 @@
                 self.centerList = ko.observableArray();
 
 
-                self.model.area.subscribe(function(areaVal){
+             /*   self.model.area.subscribe(function(areaVal){
                     if(areaVal!= null && areaVal != undefined && areaVal != "")
                         RSSB.serviceCall('POST', 'rest/getCentreList/'+areaVal, "", getCenterList);
-                });
+                })*/;
 
 
 
@@ -129,7 +129,7 @@
                     }
                 };
 
-                RSSB.serviceCall('POST', 'rest/getAreaList', "", getAreaList);
+            //    RSSB.serviceCall('POST', 'rest/getAreaList', "", getAreaList);
 
 
 
