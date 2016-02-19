@@ -105,7 +105,7 @@ var TRACKER = (function () {
     };
 
     var getBusLoc = function () {
-        $.get("getGeoAll/12", function (data) {
+        $.get("rest/getGeoAll/12", function (data) {
             //$.get("test.json", function(data){
             //var response = JSON.parse(data);
             var response = (data);
@@ -158,7 +158,7 @@ var TRACKER = (function () {
     };
 
     var trackUser = function (id, from, to) {
-        $.get("trackUser/" + id + "/" + from + "/" + to, function (data) {
+        $.get("rest/trackUser/" + id + "/" + from + "/" + to, function (data) {
 
             clearMarkers();
             var wps = [];
@@ -188,7 +188,7 @@ var TRACKER = (function () {
     };
 
     var getUserList = function () {
-        $.get("getAllUsers", function (data) {
+        $.get("rest/getAllUsers", function (data) {
             //$.get("user.json", function(data){
             //	var response = JSON.parse(data);
             var response = data;
